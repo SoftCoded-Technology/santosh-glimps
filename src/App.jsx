@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginForm from "./assets/components/Login";
 import Signup from "./assets/components/Signup";
+import ResetPass from "./assets/components/ResetPass";
 
 function App() {
   const router = createBrowserRouter([
@@ -9,8 +10,12 @@ function App() {
       element: <LoginForm />,
     },
     {
-      path: "/signup",
+      path: "signup",
       element: <Signup />,
+    },
+    {
+      path: "resetpass",
+      element: <ResetPass />,
     },
   ]);
 
