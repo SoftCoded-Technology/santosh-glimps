@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Typography,
   Button,
@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { useResetPasswordMutation } from "../../redux/apiSlice";
+import { useResetPasswordMutation } from "../redux/apiSlice";
 
 export default function ResetPass() {
   const [password, setPassword] = useState("");
@@ -21,7 +21,25 @@ export default function ResetPass() {
   const navigate = useNavigate();
   const [resetPassword, { isLoading, isError }] = useResetPasswordMutation();
 
+  useEffect(() => {
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+    if (passwordRegex.test(password)) {
+      setError(
+        "Password must contain at least 8 characters, including a number and a special character"
+      );
+    }
+  }, [password]);
+
   const handleResetPassword = async () => {
+    setError("");
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+
+    if (passwordRegex.test(password)) {
+      setError(
+        "Password must contain at least 8 characters, including a number and a special character"
+      );
+      return;
+    }
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -68,7 +86,7 @@ export default function ResetPass() {
         fullWidth
         margin="normal"
         label="Password"
-        type={showPassword ? "text" : "password"} // Toggle between text and password
+        type={showPassword ? "text" : "password"}
         value={password}
         error={!!error}
         helperText={error}
@@ -88,7 +106,7 @@ export default function ResetPass() {
         fullWidth
         margin="normal"
         label="Confirm Password"
-        type={showConfirmPassword ? "text" : "password"} // Toggle between text and password
+        type={showConfirmPassword ? "text" : "password"}
         value={confirmPassword}
         error={!!error}
         helperText={error}

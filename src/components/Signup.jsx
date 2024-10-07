@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, TextField, Typography, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useSignupMutation } from '../../redux/apiSlice';
+import { useSignupMutation } from '../redux/apiSlice';
 
 const Signup = () => {
   const [userData, setUserData] = useState({

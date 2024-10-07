@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useLoginMutation } from "../../redux/apiSlice";
+import { useLoginMutation } from "../redux/apiSlice";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
