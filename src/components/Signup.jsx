@@ -17,6 +17,7 @@ const Signup = () => {
 
   const validate = () => {
     let validationErrors = {};
+
     const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
 
     if (!userData.fullName) validationErrors.fullName = 'Full name is required';
@@ -26,7 +27,7 @@ const Signup = () => {
     if (!userData.dob) validationErrors.dob = 'Date of birth is required';
 
     setErrors(validationErrors);
-    return Object.keys(validationErrors).length === 0;
+    return Object.keys(validationErrors).length === 0; // no validation(all set no err) true means
   };
 
   const handleChange = (e) => {
@@ -36,7 +37,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) return;
+    if (!validate()) return; //if no errors go ahead
 
     try {
       await signup(userData).unwrap();
